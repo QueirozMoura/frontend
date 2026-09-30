@@ -35,6 +35,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     void refreshSession();
+    const handleUnauthorized = () => setUser(null);
+    window.addEventListener('serviceflow:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('serviceflow:unauthorized', handleUnauthorized);
   }, []);
 
   const login = async (input: LoginInput) => {

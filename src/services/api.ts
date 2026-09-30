@@ -21,6 +21,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   });
 
   if (!response.ok) {
+    if (response.status === 401) window.dispatchEvent(new Event('serviceflow:unauthorized'));
     let message = 'Não foi possível concluir a solicitação.';
     try {
       const body: unknown = await response.json();
@@ -39,9 +40,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export const api = {
   get: <T>(path: string) => request<T>(path),
-  post: <T>(path: string, body?: unknown) =>
-    request<T>(path, {
-      method: 'POST',
-      body: body === undefined ? undefined : JSON.stringify(body),
-    }),
+  post: <T>(path: string, body?: unknown) => request<T>(path, { method: 'POST', body: body === undefined ? undefined : JSON.stringify(body) }),
+  patch: <T>(path: string, body: unknown) => request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
+  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 };

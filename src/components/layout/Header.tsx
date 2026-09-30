@@ -6,7 +6,7 @@ interface HeaderProps { user: User; onMenuClick: () => void; }
 
 export function Header({ user, onMenuClick }: HeaderProps) {
   const location = useLocation();
-  const title = location.pathname === '/dashboard' ? 'Dashboard' : 'ServiceFlow';
+  const title = location.pathname.startsWith('/customers') ? 'Clientes' : location.pathname.startsWith('/equipment') ? 'Equipamentos' : 'Dashboard';
   return (
     <header className="header">
       <button className="icon-button mobile-only" type="button" aria-label="Abrir menu" onClick={onMenuClick}><Menu size={21} /></button>

@@ -29,8 +29,8 @@ const groups = [
   {
     label: 'Operação',
     items: [
-      { label: 'Clientes', icon: Users },
-      { label: 'Equipamentos', icon: Boxes },
+      { label: 'Clientes', icon: Users, to: '/customers' },
+      { label: 'Equipamentos', icon: Boxes, to: '/equipment' },
       { label: 'Ordens de serviço', icon: ClipboardList },
       { label: 'Orçamentos', icon: FileText },
       { label: 'Pagamentos', icon: BadgeDollarSign },
